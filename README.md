@@ -5,6 +5,7 @@ This repository contains my complete hands-on learning and implementation of Azu
 The project demonstrates how Synapse can be used to build scalable data warehousing and analytics solutions.
 
 📌 Topics Covered
+
 🔹 Azure Synapse Fundamentals
 
 Azure Synapse Analytics Overview
