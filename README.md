@@ -1,4 +1,4 @@
-Azure Synapse Analytics – End-to-End Implementation
+# Azure Synapse Analytics – End-to-End Implementation
 
 This repository contains my complete hands-on learning and implementation of Azure Synapse Analytics, covering architecture, SQL pools, Spark pools, data lake integration, distributed tables, and advanced data loading techniques.
 
