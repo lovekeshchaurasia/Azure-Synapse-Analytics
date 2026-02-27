@@ -8,6 +8,9 @@
 		"lovesynapsews-WorkspaceDefaultSqlServer_connectionString": {
 			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=tcp:lovesynapsews.sql.azuresynapse.net,1433;Initial Catalog=@{linkedService().DBName}"
 		},
+		"extdatalake_properties_typeProperties_url": {
+			"value": "https://lovedatalake.dfs.core.windows.net/"
+		},
 		"lovesynapsews-WorkspaceDefaultStorage_properties_typeProperties_url": {
 			"value": "https://manstoragesynapselove.dfs.core.windows.net"
 		}

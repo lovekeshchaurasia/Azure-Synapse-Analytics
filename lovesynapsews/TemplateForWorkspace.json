@@ -12,6 +12,10 @@
 			"metadata": "Secure string for 'connectionString' of 'lovesynapsews-WorkspaceDefaultSqlServer'",
 			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=tcp:lovesynapsews.sql.azuresynapse.net,1433;Initial Catalog=@{linkedService().DBName}"
 		},
+		"extdatalake_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://lovedatalake.dfs.core.windows.net/"
+		},
 		"lovesynapsews-WorkspaceDefaultStorage_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://manstoragesynapselove.dfs.core.windows.net"
@@ -21,6 +25,25 @@
 		"workspaceId": "[concat('Microsoft.Synapse/workspaces/', parameters('workspaceName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('workspaceName'), '/extdatalake')]",
+			"type": "Microsoft.Synapse/workspaces/linkedServices",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('extdatalake_properties_typeProperties_url')]"
+				},
+				"connectVia": {
+					"referenceName": "AutoResolveIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
+			]
+		},
 		{
 			"name": "[concat(parameters('workspaceName'), '/lovesynapsews-WorkspaceDefaultSqlServer')]",
 			"type": "Microsoft.Synapse/workspaces/linkedServices",
@@ -106,6 +129,26 @@
 					"currentConnection": {
 						"databaseName": "lovededicatedpool",
 						"poolName": "lovededicatedpool"
+					},
+					"resultLimit": 5000
+				},
+				"type": "SqlQuery"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/openrowset')]",
+			"type": "Microsoft.Synapse/workspaces/sqlscripts",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"content": {
+					"query": "CREATE EXTERNAL FILE FORMAT csv_format\nWITH\n(\n    FORMAT_TYPE = DELIMITEDTEXT,\n    FORMAT_OPTIONS ( \n                     FIELD_TERMINATOR = '',\n     ) \n)\n\n",
+					"metadata": {
+						"language": "sql"
+					},
+					"currentConnection": {
+						"databaseName": "loveserverless",
+						"poolName": "Built-in"
 					},
 					"resultLimit": 5000
 				},
