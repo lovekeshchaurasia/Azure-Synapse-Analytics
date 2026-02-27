@@ -1,0 +1,17 @@
+{
+	"name": "openrowset",
+	"properties": {
+		"content": {
+			"query": "CREATE EXTERNAL FILE FORMAT csv_format\nWITH\n(\n    FORMAT_TYPE = DELIMITEDTEXT,\n    FORMAT_OPTIONS ( \n                     FIELD_TERMINATOR = '',\n     ) \n)\n\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "loveserverless",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
