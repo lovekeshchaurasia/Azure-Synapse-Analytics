@@ -117,6 +117,26 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('workspaceName'), '/CETAS')]",
+			"type": "Microsoft.Synapse/workspaces/sqlscripts",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"content": {
+					"query": "",
+					"metadata": {
+						"language": "sql"
+					},
+					"currentConnection": {
+						"databaseName": "master",
+						"poolName": "Built-in"
+					},
+					"resultLimit": 5000
+				},
+				"type": "SqlQuery"
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('workspaceName'), '/distributed_tables')]",
 			"type": "Microsoft.Synapse/workspaces/sqlscripts",
 			"apiVersion": "2019-06-01-preview",
@@ -137,12 +157,12 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('workspaceName'), '/openrowset')]",
+			"name": "[concat(parameters('workspaceName'), '/external_table')]",
 			"type": "Microsoft.Synapse/workspaces/sqlscripts",
 			"apiVersion": "2019-06-01-preview",
 			"properties": {
 				"content": {
-					"query": "CREATE EXTERNAL FILE FORMAT csv_format\nWITH\n(\n    FORMAT_TYPE = DELIMITEDTEXT,\n    FORMAT_OPTIONS ( \n                     FIELD_TERMINATOR = '',\n     ) \n)\n\n",
+					"query": "CREATE EXTERNAL FILE FORMAT csv_format\nWITH\n(\n    FORMAT_TYPE = DELIMITEDTEXT,\n    FORMAT_OPTIONS ( \n                     FIELD_TERMINATOR = ''\n     ) \n)\n\nCREATE EXTERNAL TABLE revenue_ext_table\n(\n    Dealer_ID VARCHAR(4000),\n    Model_ID VARCHAR(4000),\n    Branch_ID VARCHAR(4000),\n    Date_ID VARCHAR(4000),\n    Units_Sold VARCHAR(4000),\n    Revenue VARCHAR(4000)\n)\nWITH\n(\n    LOCATION = 'revenue',\n    DATA_SOURCE = raw_ext_source,\n    FILE_FORMAT = csv_format\n)\n\n\nSELECT * FROM revenue_ext_table;",
 					"metadata": {
 						"language": "sql"
 					},
