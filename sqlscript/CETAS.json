@@ -2,12 +2,12 @@
 	"name": "CETAS",
 	"properties": {
 		"content": {
-			"query": "",
+			"query": "-- CETAS\n\nCREATE EXTERNAL TABLE revenue_cetas\nWITH\n(\n    LOCATION = 'cetas_revenue',\n    DATA_SOURCE = raw_ext_source,\n    FILE_FORMAT = parquet_format\n)\nAS\nSELECT\n    TOP 100 *\nFROM\n    OPENROWSET(\n        BULK 'revenue',\n        DATA_SOURCE = 'raw_ext_source',\n        FORMAT = 'CSV',\n        PARSER_VERSION = '2.0',\n        HEADER_ROW = TRUE\n    ) AS query1",
 			"metadata": {
 				"language": "sql"
 			},
 			"currentConnection": {
-				"databaseName": "master",
+				"databaseName": "loveserverless",
 				"poolName": "Built-in"
 			},
 			"resultLimit": 5000

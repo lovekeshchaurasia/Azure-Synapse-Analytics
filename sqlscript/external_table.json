@@ -2,7 +2,7 @@
 	"name": "external_table",
 	"properties": {
 		"content": {
-			"query": "CREATE EXTERNAL FILE FORMAT csv_format\nWITH\n(\n    FORMAT_TYPE = DELIMITEDTEXT,\n    FORMAT_OPTIONS ( \n                     FIELD_TERMINATOR = ''\n     ) \n)\n\nCREATE EXTERNAL TABLE revenue_ext_table\n(\n    Dealer_ID VARCHAR(4000),\n    Model_ID VARCHAR(4000),\n    Branch_ID VARCHAR(4000),\n    Date_ID VARCHAR(4000),\n    Units_Sold VARCHAR(4000),\n    Revenue VARCHAR(4000)\n)\nWITH\n(\n    LOCATION = 'revenue',\n    DATA_SOURCE = raw_ext_source,\n    FILE_FORMAT = csv_format\n)\n\n\nSELECT * FROM revenue_ext_table;",
+			"query": "CREATE EXTERNAL FILE FORMAT csv_format\nWITH\n(\n    FORMAT_TYPE = DELIMITEDTEXT,\n    FORMAT_OPTIONS ( \n                     FIELD_TERMINATOR = ''\n     ) \n)\n\nCREATE EXTERNAL TABLE revenue_ext_table\n(\n    Dealer_ID VARCHAR(4000),\n    Model_ID VARCHAR(4000),\n    Branch_ID VARCHAR(4000),\n    Date_ID VARCHAR(4000),\n    Units_Sold VARCHAR(4000),\n    Revenue VARCHAR(4000)\n)\nWITH\n(\n    LOCATION = 'revenue',\n    DATA_SOURCE = raw_ext_source,\n    FILE_FORMAT = csv_format\n)\n\n\nSELECT * FROM revenue_ext_table;\n\n-- CREATE PARQETT FORMAT\nCREATE EXTERNAL FILE FORMAT parquet_format\nWITH\n(\n    FORMAT_TYPE = PARQUET,\n    DATA_COMPRESSION = 'org.apache.hadoop.io.compress.SnappyCodec' \n)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
 			"metadata": {
 				"language": "sql"
 			},
